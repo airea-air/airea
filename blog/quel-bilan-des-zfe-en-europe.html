@@ -11,46 +11,87 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
-<body>
+<body class="page-inner">
 <a class="skip-link" href="#main-content">Aller au contenu</a>
 
-<header class="site-header" id="top">
+<header class="site-header " id="top">
   <div class="container header-shell">
     <a class="brand" href="../index.html" aria-label="Airea - accueil">
-      <img src="../images/airea/Logo_Airea_Horizontal.webp" alt="Airea" class="brand-logo">
+      <img src="../images/airea/Logo_Airea_Horizontal.webp" alt="Airea" class="brand-logo brand-logo-light">
+      <img src="../images/airea/Logo_Airea_Horizontal.webp" alt="Airea" class="brand-logo brand-logo-dark">
     </a>
 
     <nav class="desktop-nav" aria-label="Navigation principale">
-      <ul><li><a href="../index.html">Accueil</a></li><li><a href="../societe/index.html">Notre entreprise</a></li><li><a href="../expertises/amenagements-urbains.html">Expertises</a></li><li><a href="../blog/index.html" class="is-current">Blog</a></li><li><a href="../contact/index.html">Contact</a></li></ul>
+      <ul class="desktop-menu">
+        <li><a href="../index.html" class="">Accueil</a></li>
+        <li><a href="../societe/index.html" class="">Notre entreprise</a></li>
+        <li class="has-dropdown">
+          <button class="nav-trigger " type="button" aria-expanded="false">Nos expertises</button>
+          <div class="mega-panel" role="group" aria-label="Sous-navigation expertises">
+            <div class="mega-grid">
+              <a href="../expertises/amenagements-urbains.html"><strong>Aménagements urbains</strong><span>Études air et santé, ZAC, écoquartiers, NPNRU.</span></a>
+              <a href="../expertises/infrastructures-routieres.html"><strong>Infrastructures routières</strong><span>Études réglementaires, trafics, exposition des populations.</span></a>
+              <a href="../expertises/industries.html"><strong>Industries</strong><span>Mesures, modélisation, odeurs, process et conformité.</span></a>
+              <a href="../expertises/chantiers.html"><strong>Chantiers</strong><span>Suivi des émissions, poussières et maîtrise des impacts.</span></a>
+              <a href="../expertises/batiments.html"><strong>Bâtiments</strong><span>Air intérieur, ventilation, confort et polluants spécifiques.</span></a>
+              <a href="../expertises/mobilites.html"><strong>Mobilités</strong><span>Déplacements, émissions et stratégies territoriales.</span></a>
+              <a href="../expertises/conseil-expertise-formation.html"><strong>Conseil, expertise et formation</strong><span>AMO, avis techniques, formations et accompagnement.</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <button class="nav-trigger " type="button" aria-expanded="false">Outils</button>
+          <div class="mega-panel mega-panel-small" role="group" aria-label="Sous-navigation outils">
+            <div class="mega-grid single-column">
+              <a href="../outils/teletravail/index.html"><strong>Télétravail et mobilité</strong><span>Page réservée pour l’outil.</span></a>
+              <a href="../outils/convertisseur/index.html"><strong>Convertisseur</strong><span>Page réservée pour l’outil.</span></a>
+            </div>
+          </div>
+        </li>
+        <li><a href="../blog/index.html" class="is-current">Blog</a></li>
+        <li><a href="../contact/index.html" class="">Contact</a></li>
+      </ul>
     </nav>
 
     <div class="header-actions">
       <a class="header-link" href="tel:+33148719010">01 48 71 90 10</a>
-      <a class="btn btn-primary header-cta" href="../contact/index.html">Demander un devis</a>
+      <a class="header-cta" href="../contact/index.html">Demander un devis</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-  <div class="subnav-bar">
-    <div class="container subnav-shell">
-      <div class="subnav-group"><span>Expertises</span><ul><li><a href="../expertises/amenagements-urbains.html">Aménagements urbains</a></li><li><a href="../expertises/infrastructures-routieres.html">Infrastructures routières</a></li><li><a href="../expertises/industries.html">Industries</a></li><li><a href="../expertises/chantiers.html">Chantiers</a></li><li><a href="../expertises/batiments.html">Bâtiments</a></li><li><a href="../expertises/mobilites.html">Mobilités</a></li><li><a href="../expertises/conseil-expertise-formation.html">Conseil, expertise et formation</a></li></ul></div>
-      <div class="subnav-group"><span>Outils</span><ul><li><a href="../outils/teletravail/index.html">Télétravail et mobilité</a></li><li><a href="../outils/convertisseur/index.html">Convertisseur</a></li></ul></div>
-    </div>
-  </div>
   <nav class="mobile-nav" id="mobile-menu" aria-label="Navigation mobile" hidden>
     <div class="container mobile-shell">
-      <ul class="mobile-primary"><li><a href="../index.html">Accueil</a></li><li><a href="../societe/index.html">Notre entreprise</a></li><li><a href="../expertises/amenagements-urbains.html">Expertises</a></li><li><a href="../blog/index.html" class="is-current">Blog</a></li><li><a href="../contact/index.html">Contact</a></li></ul>
-      <div class="mobile-columns">
-        <div>
-          <p class="mobile-heading">Expertises</p>
-          <ul><li><a href="../expertises/amenagements-urbains.html">Aménagements urbains</a></li><li><a href="../expertises/infrastructures-routieres.html">Infrastructures routières</a></li><li><a href="../expertises/industries.html">Industries</a></li><li><a href="../expertises/chantiers.html">Chantiers</a></li><li><a href="../expertises/batiments.html">Bâtiments</a></li><li><a href="../expertises/mobilites.html">Mobilités</a></li><li><a href="../expertises/conseil-expertise-formation.html">Conseil, expertise et formation</a></li></ul>
-        </div>
-        <div>
-          <p class="mobile-heading">Outils</p>
-          <ul><li><a href="../outils/teletravail/index.html">Télétravail et mobilité</a></li><li><a href="../outils/convertisseur/index.html">Convertisseur</a></li></ul>
-        </div>
-      </div>
+      <ul class="mobile-primary">
+        <li><a href="../index.html" class="">Accueil</a></li>
+        <li><a href="../societe/index.html" class="">Notre entreprise</a></li>
+        <li>
+          <button class="mobile-accordion-trigger" type="button" aria-expanded="false">Nos expertises</button>
+          <div class="mobile-accordion-panel" hidden>
+            <ul>
+              <li><a href="../expertises/amenagements-urbains.html">Aménagements urbains</a></li>
+              <li><a href="../expertises/infrastructures-routieres.html">Infrastructures routières</a></li>
+              <li><a href="../expertises/industries.html">Industries</a></li>
+              <li><a href="../expertises/chantiers.html">Chantiers</a></li>
+              <li><a href="../expertises/batiments.html">Bâtiments</a></li>
+              <li><a href="../expertises/mobilites.html">Mobilités</a></li>
+              <li><a href="../expertises/conseil-expertise-formation.html">Conseil, expertise et formation</a></li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <button class="mobile-accordion-trigger" type="button" aria-expanded="false">Outils</button>
+          <div class="mobile-accordion-panel" hidden>
+            <ul>
+              <li><a href="../outils/teletravail/index.html">Télétravail et mobilité</a></li>
+              <li><a href="../outils/convertisseur/index.html">Convertisseur</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="../blog/index.html" class="is-current">Blog</a></li>
+        <li><a href="../contact/index.html" class="">Contact</a></li>
+      </ul>
     </div>
   </nav>
 </header>
