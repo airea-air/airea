@@ -1,142 +1,134 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-  const header = document.querySelector('.site-header');
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const heroHome = document.querySelector('.hero-home');
+(() => {
+  const header = document.querySelector('[data-header]');
+  const hero = document.querySelector('.hero');
+  const mobileToggle = document.querySelector('[data-menu-toggle]');
+  const nav = document.querySelector('[data-nav]');
+  const dropdowns = [...document.querySelectorAll('[data-dropdown]')];
 
-  function setHeaderState() {
-    if (!header) return;
-    if (!body.classList.contains('page-home') || !heroHome) {
-      header.classList.add('is-solid');
-      return;
-    }
-
-    const threshold = Math.max(heroHome.offsetHeight - header.offsetHeight - 48, 120);
-    const isSolid = window.scrollY > threshold;
-    header.classList.toggle('is-solid', isSolid);
-  }
-
-  setHeaderState();
-  window.addEventListener('scroll', setHeaderState, { passive: true });
-  window.addEventListener('resize', setHeaderState);
-
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!expanded));
-      mobileMenu.hidden = expanded;
+  const closeAllDropdowns = (except = null) => {
+    dropdowns.forEach((dropdown) => {
+      if (dropdown === except) return;
+      dropdown.classList.remove('is-open');
+      const button = dropdown.querySelector('[data-dropdown-button]');
+      if (button) button.setAttribute('aria-expanded', 'false');
     });
-  }
+  };
 
-  const dropdownItems = Array.from(document.querySelectorAll('.has-dropdown'));
+  dropdowns.forEach((dropdown) => {
+    const button = dropdown.querySelector('[data-dropdown-button]');
+    if (!button) return;
 
-  function closeDropdowns(except = null) {
-    dropdownItems.forEach((item) => {
-      if (item === except) return;
-      item.classList.remove('is-open');
-      const trigger = item.querySelector('.nav-trigger');
-      if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    });
-  }
-
-  dropdownItems.forEach((item) => {
-    const trigger = item.querySelector('.nav-trigger');
-    if (!trigger) return;
-
-    trigger.addEventListener('click', (event) => {
-      event.preventDefault();
-      const open = item.classList.contains('is-open');
-      closeDropdowns(item);
-      item.classList.toggle('is-open', !open);
-      trigger.setAttribute('aria-expanded', String(!open));
-    });
-
-    item.addEventListener('mouseleave', () => {
-      item.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = !dropdown.classList.contains('is-open');
+      closeAllDropdowns(willOpen ? dropdown : null);
+      dropdown.classList.toggle('is-open', willOpen);
+      button.setAttribute('aria-expanded', String(willOpen));
     });
   });
 
   document.addEventListener('click', (event) => {
-    if (!event.target.closest('.has-dropdown')) closeDropdowns();
+    const clickedDropdown = event.target.closest('[data-dropdown]');
+    if (!clickedDropdown) closeAllDropdowns();
   });
 
-  document.querySelectorAll('.mobile-accordion-trigger').forEach((trigger) => {
-    const panel = trigger.nextElementSibling;
-    if (!panel) return;
-    trigger.addEventListener('click', () => {
-      const expanded = trigger.getAttribute('aria-expanded') === 'true';
-      trigger.setAttribute('aria-expanded', String(!expanded));
-      panel.hidden = expanded;
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeAllDropdowns();
+      if (nav) nav.classList.remove('is-open');
+      if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (mobileToggle && nav) {
+    mobileToggle.addEventListener('click', () => {
+      const willOpen = !nav.classList.contains('is-open');
+      nav.classList.toggle('is-open', willOpen);
+      mobileToggle.setAttribute('aria-expanded', String(willOpen));
+      if (!willOpen) closeAllDropdowns();
     });
-  });
+  }
 
-  async function loadSequentialLogos(wall) {
-    const prefix = wall.dataset.logoPrefix;
-    const max = Number(wall.dataset.max || 50);
-    if (!prefix) return;
+  if (header && hero) {
+    const updateHeader = () => {
+      const trigger = hero.offsetHeight - header.offsetHeight - 40;
+      const scrolled = window.scrollY > Math.max(40, trigger);
+      header.classList.toggle('is-scrolled', scrolled);
+      header.classList.toggle('is-overlay', !scrolled);
+    };
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('resize', updateHeader);
+  }
 
-    let misses = 0;
+  const candidateBases = [
+    'images/secteurs/{cat}',
+    'images/{cat}',
+    'images/secteurs/{cat_lower}',
+    'images/{cat_lower}'
+  ];
+
+  function probeImage(url) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(url);
+      img.onerror = () => resolve(null);
+      img.src = url;
+    });
+  }
+
+  async function findExistingUrl(category, index) {
+    const lower = category.toLowerCase();
+    const attempts = candidateBases.map((pattern) => `${pattern.replace('{cat}', category).replace('{cat_lower}', lower)}/${category}${index}.webp`);
+    for (const url of attempts) {
+      const found = await probeImage(url);
+      if (found) return found;
+    }
+    return null;
+  }
+
+  async function loadCategoryLogos(category, wall, options = {}) {
+    const max = Number(options.max || 50);
+    const perCategory = Number(options.perCategory || max);
+    let foundCount = 0;
+    let missStreak = 0;
+
     for (let index = 1; index <= max; index += 1) {
-      const src = `${prefix}${index}.webp`;
-      const exists = await new Promise((resolve) => {
-        const probe = new Image();
-        probe.onload = () => resolve(true);
-        probe.onerror = () => resolve(false);
-        probe.src = src;
-      });
-
-      if (!exists) {
-        misses += 1;
-        if (misses >= 3) break;
-        continue;
+      const url = await findExistingUrl(category, index);
+      if (url) {
+        const tile = document.createElement('div');
+        tile.className = 'logo-tile';
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = `Logo client ${category} ${index}`;
+        img.loading = 'lazy';
+        tile.appendChild(img);
+        wall.appendChild(tile);
+        foundCount += 1;
+        missStreak = 0;
+      } else if (foundCount > 0) {
+        missStreak += 1;
+        if (missStreak >= 2) break;
       }
 
-      misses = 0;
-      const figure = document.createElement('figure');
-      figure.className = 'logo-item';
-      const img = document.createElement('img');
-      img.src = src;
-      img.loading = 'lazy';
-      img.alt = '';
-      figure.appendChild(img);
-      wall.appendChild(figure);
+      if (foundCount >= perCategory) break;
     }
   }
 
-  document.querySelectorAll('.logo-wall').forEach((wall) => {
-    loadSequentialLogos(wall);
-  });
-
-  document.querySelectorAll('.site-form').forEach((form) => {
-    const status = form.querySelector('.form-status');
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (!form.reportValidity()) return;
-
-      const honeypot = form.querySelector('input[name="company_website"]');
-      if (honeypot && honeypot.value.trim() !== '') return;
-
-      const route = form.dataset.apiRoute || '';
-      const data = new FormData(form);
-
-      if (!route || route.includes('api/forms/')) {
-        if (status) {
-          status.textContent = 'Interface prête. Le raccordement Node.js / Infomaniak sera branché ensuite.';
-        }
-        return;
+  async function buildLogoWalls() {
+    const walls = [...document.querySelectorAll('[data-logo-wall]')];
+    for (const wall of walls) {
+      const categories = (wall.dataset.categories || '')
+        .split(',')
+        .map((value) => value.trim())
+        .filter(Boolean);
+      const limit = Number(wall.dataset.limit || 12);
+      const perCategory = Math.max(1, Math.ceil(limit / Math.max(categories.length, 1)));
+      for (const category of categories) {
+        await loadCategoryLogos(category, wall, { max: 50, perCategory });
       }
+    }
+  }
 
-      try {
-        const response = await fetch(route, { method: 'POST', body: data });
-        if (!response.ok) throw new Error('API_ERROR');
-        if (status) status.textContent = 'Message envoyé.';
-        form.reset();
-      } catch {
-        if (status) status.textContent = 'L’envoi n’est pas encore configuré.';
-      }
-    });
-  });
-});
+  buildLogoWalls();
+})();
