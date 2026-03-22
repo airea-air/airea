@@ -61,9 +61,18 @@
     window.addEventListener('resize', updateHeader);
   }
 
+  const shuffle = (items) => {
+    const array = [...items];
+    for (let i = array.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   const candidateBases = [
-    'images/secteurs/{cat}',
     'images/{cat}',
+    'images/secteurs/{cat}',
     'images/secteurs/{cat_lower}',
     'images/{cat_lower}'
   ];
@@ -87,48 +96,92 @@
     return null;
   }
 
-  async function loadCategoryLogos(category, wall, options = {}) {
-    const max = Number(options.max || 50);
-    const perCategory = Number(options.perCategory || max);
-    let foundCount = 0;
+  async function collectCategoryLogos(category, max = 80) {
+    const urls = [];
+    let foundOne = false;
     let missStreak = 0;
 
     for (let index = 1; index <= max; index += 1) {
       const url = await findExistingUrl(category, index);
       if (url) {
-        const tile = document.createElement('div');
-        tile.className = 'logo-tile';
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = `Logo client ${category} ${index}`;
-        img.loading = 'lazy';
-        tile.appendChild(img);
-        wall.appendChild(tile);
-        foundCount += 1;
+        urls.push(url);
+        foundOne = true;
         missStreak = 0;
-      } else if (foundCount > 0) {
+      } else if (foundOne) {
         missStreak += 1;
-        if (missStreak >= 2) break;
+        if (missStreak >= 3) break;
       }
+    }
 
-      if (foundCount >= perCategory) break;
+    return urls;
+  }
+
+  function makeLogoTile(url) {
+    const tile = document.createElement('div');
+    tile.className = 'logo-square';
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Logo client';
+    img.loading = 'lazy';
+    tile.appendChild(img);
+    return tile;
+  }
+
+  async function buildLogoMarquee() {
+    const marquee = document.querySelector('[data-logo-marquee]');
+    if (!marquee) return;
+
+    const categories = (marquee.dataset.categories || '')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean);
+
+    let allLogos = [];
+    for (const category of categories) {
+      const urls = await collectCategoryLogos(category, 80);
+      allLogos = allLogos.concat(urls);
+    }
+
+    allLogos = shuffle(allLogos);
+    if (!allLogos.length) return;
+
+    const rows = 3;
+    const chunkSize = Math.max(8, Math.ceil(allLogos.length / rows));
+
+    for (let rowIndex = 0; rowIndex < rows; rowIndex += 1) {
+      const row = document.createElement('div');
+      row.className = 'logos-row';
+
+      const track = document.createElement('div');
+      track.className = 'logos-track';
+      if (rowIndex === 1) track.classList.add('is-reverse');
+      if (rowIndex === 2) track.classList.add('is-slower');
+
+      const slice = allLogos.slice(rowIndex * chunkSize, (rowIndex + 1) * chunkSize);
+      const rowLogos = shuffle(slice.length ? slice : allLogos).slice(0, Math.min(chunkSize, allLogos.length));
+
+      [...rowLogos, ...rowLogos].forEach((url) => {
+        track.appendChild(makeLogoTile(url));
+      });
+
+      row.appendChild(track);
+      marquee.appendChild(row);
     }
   }
 
-  async function buildLogoWalls() {
-    const walls = [...document.querySelectorAll('[data-logo-wall]')];
-    for (const wall of walls) {
-      const categories = (wall.dataset.categories || '')
-        .split(',')
-        .map((value) => value.trim())
-        .filter(Boolean);
-      const limit = Number(wall.dataset.limit || 12);
-      const perCategory = Math.max(1, Math.ceil(limit / Math.max(categories.length, 1)));
-      for (const category of categories) {
-        await loadCategoryLogos(category, wall, { max: 50, perCategory });
-      }
-    }
+  const scrollCue = document.querySelector('.scroll-cue');
+  if (scrollCue) {
+    scrollCue.addEventListener('click', (event) => {
+      const href = scrollCue.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      event.preventDefault();
+      scrollCue.classList.add('is-pressed');
+      window.setTimeout(() => scrollCue.classList.remove('is-pressed'), 450);
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
-  buildLogoWalls();
+  buildLogoMarquee();
 })();
