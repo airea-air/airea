@@ -1,3 +1,4 @@
+import {basePath,prefixUrls} from './paths.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -80,3 +81,12 @@ const video='public/Images/Article_RSD_Marseille_video1.mp4';
 if(!fs.existsSync(video))missingMedia.add(video);
 fs.writeFileSync('dist/medias-manquants.json',JSON.stringify([...missingMedia].sort(),null,2)+'\n');
 if(missingMedia.size)console.log(`${missingMedia.size} médias à ajouter : voir dist/medias-manquants.json. Construction terminée.`);
+
+const deploymentBase=basePath();
+const siteOrigin=(process.env.SITE_ORIGIN||'https://www.airea.fr').replace(/\/$/,'');
+for(const file of files('dist').filter(p=>/\.(html|css|js|xml|txt)$/.test(p))){
+ let content=prefixUrls(read(file),deploymentBase);
+ content=content.replaceAll('https://www.airea.fr/',siteOrigin+deploymentBase+'/');
+ fs.writeFileSync(file,content);
+}
+fs.writeFileSync('dist/.nojekyll','');

@@ -67,3 +67,11 @@ npm run check
 ```
 
 Les pages complètes sont générées dans `dist/`, dossier de sortie configuré pour l’hébergement. `dist/medias-manquants.json` liste les médias encore absents ; ce rapport ne bloque pas la construction. Les contrôles échouent toujours pour une page, un script, une feuille de style ou une donnée locale manquante.
+
+## Publication sur GitHub Pages
+
+Le workflow `.github/workflows/pages.yml` construit et vérifie le site avec Node.js, puis publie le contenu de `dist/`. Aucun Node.js n’est nécessaire sur le PC des visiteurs ou du propriétaire pour cette publication automatique.
+
+Dans le dépôt GitHub : **Settings → Pages → Build and deployment → Source → GitHub Actions**. Puis dans **Actions → Publier le site Airea → Run workflow → main → Run workflow**. Les prochains commits sur `main` déclenchent la publication automatiquement.
+
+Le workflow utilise `BASE_PATH=/airea` et `SITE_ORIGIN=https://www.airea-air.com`, pour publier sous `/airea/`. Ces options adaptent les liens, les médias, les polices, les outils intégrés, les URL canoniques et le sitemap. Elles ne changent ni le DNS ni les réglages du domaine. En local et sur un hébergement à la racine, `npm run build` conserve des chemins sans préfixe.
