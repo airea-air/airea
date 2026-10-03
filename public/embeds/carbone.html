@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Répartition des émissions</title>
+<style>
+:root {
+--bg: #ffffff;
+--text: #1f2937;
+--muted: #6b7280;
+--border: rgba(0, 0, 0, 0.08);
+--c1: #1f7a5a; /* déplacements pro */
+--c2: #6aa84f; /* achats */
+--c3: #d4a017; /* domicile-travail */
+--c4: #6c8ebf; /* électricité */
+--c5: #d9dde3; /* autres */
+}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+background: var(--bg);
+color: var(--text);
+}
+.section {
+max-width: 1100px;
+margin: 0 auto;
+padding: 40px 24px;
+background: #fff;
+}
+.grid {
+display: grid;
+grid-template-columns: minmax(280px, 430px) 1fr;
+gap: 28px;
+align-items: center;
+}
+.chart-wrap {
+display: grid;
+place-items: center;
+}
+.chart-card {
+width: min(100%, 390px);
+aspect-ratio: 1;
+background: #fff;
+border-radius: 24px;
+display: grid;
+place-items: center;
+position: relative;
+overflow: visible;
+}
+.chart {
+width: 78%;
+aspect-ratio: 1;
+border-radius: 50%;
+position: relative;
+transform: scale(.92);
+opacity: 0;
+transition: opacity .45s ease, transform .8s ease;
+background:
+conic-gradient(
+var(--c1) 0deg 223.2deg,
+var(--c2) 223.2deg 309.6deg,
+var(--c3) 309.6deg 345.6deg,
+var(--c4) 345.6deg 356.4deg,
+var(--c5) 356.4deg 360deg
+);
+-webkit-mask: conic-gradient(#000 0deg var(--sweep, 0deg), transparent 0deg 360deg);
+mask: conic-gradient(#000 0deg var(--sweep, 0deg), transparent 0deg 360deg);
+}
+.chart::after {
+content: "";
+position: absolute;
+inset: 22%;
+background: #fff;
+border-radius: 50%;
+}
+.chart-center {
+position: absolute;
+text-align: center;
+z-index: 2;
+opacity: 0;
+transform: translateY(8px);
+transition: opacity .45s ease .45s, transform .45s ease .45s;
+pointer-events: none;
+}
+.chart-center strong {
+display: block;
+font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+line-height: 1;
+}
+.chart-center span {
+font-size: .8rem;
+color: var(--muted);
+}
+.chart-card.is-visible .chart {
+opacity: 1;
+transform: scale(1);
+animation: drawPie 1.8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.chart-card.is-visible .chart-center {
+opacity: 1;
+transform: translateY(0);
+}
+@keyframes drawPie {
+from { --sweep: 0deg; }
+to   { --sweep: 360deg; }
+}
+/* Labels sur le camembert */
+.pie-label {
+position: absolute;
+z-index: 3;
+font-weight: 700;
+font-size: 0.88rem;
+line-height: 1;
+color: #111827;
+opacity: 0;
+transform: translate(-50%, -50%) scale(.82);
+transition: opacity .4s ease, transform .4s ease, left .2s ease, top .2s ease;
+pointer-events: none;
+background: rgba(255,255,255,.96);
+padding: 4px 7px;
+border-radius: 999px;
+box-shadow: 0 2px 10px rgba(0,0,0,.06);
+white-space: nowrap;
+border: 1px solid rgba(0,0,0,.04);
+}
+.pie-label.show {
+opacity: 1;
+transform: translate(-50%, -50%) scale(1);
+}
+.pie-label.small {
+font-size: 0.8rem;
+padding: 3px 6px;
+}
+/* Légendes */
+.legend {
+display: grid;
+gap: 8px;
+}
+.legend-item {
+background: #fff;
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 10px 12px;
+display: grid;
+grid-template-columns: auto 1fr auto;
+gap: 10px;
+align-items: center;
+opacity: 0;
+transform: translateY(12px);
+transition: opacity .45s ease, transform .45s ease;
+}
+.legend-item.show {
+opacity: 1;
+transform: translateY(0);
+}
+.dot {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+flex: 0 0 auto;
+}
+.legend-text {
+min-width: 0;
+}
+.legend-title {
+font-weight: 500;
+font-size: 0.9rem;
+line-height: 1.25;
+}
+.legend-value {
+font-weight: 700;
+font-size: 0.9rem;
+white-space: nowrap;
+}
+@media (max-width: 860px) {
+.grid {
+grid-template-columns: 1fr;
+}
+.chart-card {
+max-width: 340px;
+margin: 0 auto;
+}
+.pie-label {
+font-size: 0.8rem;
+padding: 3px 6px;
+}
+}
+</style>
+<link rel="stylesheet" href="/assets/fonts/fonts.css"><style>body{font-family:Montserrat,sans-serif}.section{padding:10px}.grid{grid-template-columns:1fr}.chart-card{max-width:360px}.chart{opacity:1;--sweep:360deg}.chart-center,.pie-label,.legend-item{opacity:1;transform:none}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style></head>
+<body>
+<section class="section">
+<div class="grid">
+<div class="chart-wrap">
+<div class="chart-card" id="chartCard">
+<div class="chart" id="chart" aria-hidden="true"></div>
+<div class="chart-center">
+<strong>GES</strong>
+<span>répartition</span>
+</div>
+<!-- labels générés automatiquement -->
+<div class="pie-label" data-value="62">62%</div>
+<div class="pie-label" data-value="24">24%</div>
+<div class="pie-label" data-value="10">10%</div>
+<div class="pie-label small" data-value="3">3%</div>
+<div class="pie-label small" data-value="1">&lt;1%</div>
+</div>
+</div>
+<div class="legend" id="legend">
+<div class="legend-item">
+<span class="dot" style="background: var(--c1)"></span>
+<div class="legend-text">
+<div class="legend-title">Déplacements professionnels</div>
+</div>
+<div class="legend-value">62%</div>
+</div>
+<div class="legend-item">
+<span class="dot" style="background: var(--c2)"></span>
+<div class="legend-text">
+<div class="legend-title">Achats de biens et services</div>
+</div>
+<div class="legend-value">24%</div>
+</div>
+<div class="legend-item">
+<span class="dot" style="background: var(--c3)"></span>
+<div class="legend-text">
+<div class="legend-title">Domicile-travail</div>
+</div>
+<div class="legend-value">10%</div>
+</div>
+<div class="legend-item">
+<span class="dot" style="background: var(--c4)"></span>
+<div class="legend-text">
+<div class="legend-title">Électricité</div>
+</div>
+<div class="legend-value">3%</div>
+</div>
+<div class="legend-item">
+<span class="dot" style="background: var(--c5)"></span>
+<div class="legend-text">
+<div class="legend-title">Autres</div>
+</div>
+<div class="legend-value">&lt;1%</div>
+</div>
+</div>
+</div>
+</section>
+<script>
+const data = [62, 24, 10, 3, 1];
+const chartCard = document.getElementById("chartCard");
+const chart = document.getElementById("chart");
+const items = [...document.querySelectorAll(".legend-item")];
+const labels = [...document.querySelectorAll(".pie-label")];
+function positionLabels() {
+const chartRect = chart.getBoundingClientRect();
+const cardRect = chartCard.getBoundingClientRect();
+const centerX = chartRect.left - cardRect.left + chartRect.width / 2;
+const centerY = chartRect.top - cardRect.top + chartRect.height / 2;
+const donutInnerRatio = 0.22;      // correspond à inset: 22%
+const outerRadius = chartRect.width / 2;
+const innerRadius = outerRadius * donutInnerRatio;
+const baseRadius = (outerRadius + innerRadius) / 2;
+let currentAngle = 0;
+const placed = [];
+data.forEach((value, i) => {
+const angle = (value / 100) * 360;
+const midAngle = currentAngle + angle / 2;
+const rad = (midAngle - 90) * (Math.PI / 180);
+// petits segments = un peu plus loin pour éviter l’écrasement
+let radiusFactor = 1;
+if (value <= 3) radiusFactor = 1.00;
+else if (value <= 10) radiusFactor = 1.50;
+else if (value >= 50) radiusFactor = 0.80;
+let radius = baseRadius * radiusFactor;
+let x = centerX + radius * Math.cos(rad);
+let y = centerY + radius * Math.sin(rad);
+// anti-chevauchement simple :
+// si le label est trop proche d’un précédent, on l’éloigne sur son rayon
+for (let pass = 0; pass < 8; pass++) {
+let collision = false;
+for (const prev of placed) {
+const dx = x - prev.x;
+const dy = y - prev.y;
+const dist = Math.sqrt(dx * dx + dy * dy);
+const minDist = (value <= 3 || prev.value <= 3) ? 34 : 28;
+if (dist < minDist) {
+collision = true;
+radius += 8;
+x = centerX + radius * Math.cos(rad);
+y = centerY + radius * Math.sin(rad);
+break;
+}
+}
+if (!collision) break;
+}
+labels[i].style.left = `${x}px`;
+labels[i].style.top = `${y}px`;
+placed.push({ x, y, value });
+currentAngle += angle;
+});
+}
+function startAnimation() {
+positionLabels();
+chartCard.classList.add("is-visible");
+labels.forEach((label, index) => {
+setTimeout(() => label.classList.add("show"), 850 + index * 170);
+});
+items.forEach((item, index) => {
+setTimeout(() => item.classList.add("show"), 1100 + index * 150);
+});
+}
+let hasAnimated = false;
+const observer = new IntersectionObserver((entries, obs) => {
+entries.forEach(entry => {
+if (entry.isIntersecting && !hasAnimated) {
+hasAnimated = true;
+startAnimation();
+obs.disconnect();
+}
+});
+}, { threshold: 0.35 });
+observer.observe(chartCard);
+window.addEventListener("resize", () => {
+positionLabels();
+});
+window.addEventListener("load", () => {
+positionLabels();
+});
+</script>
+</body>
+</html>

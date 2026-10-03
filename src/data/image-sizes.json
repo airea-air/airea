@@ -1,0 +1,1331 @@
+{
+  "/Images/Article_Impact_Industriel_image3.webp": {
+    "width": 1920,
+    "height": 1084,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image3-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image3-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image3-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Microcapteurs_image3.webp": {
+    "width": 2688,
+    "height": 1512,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image3-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image3-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image3-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_RSD_Lille_image1.webp": {
+    "width": 960,
+    "height": 600,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_RSD_Lille_image1-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_Industrie_Mali_image1.webp": {
+    "width": 438,
+    "height": 778,
+    "variants": []
+  },
+  "/Images/VBCI.webp": {
+    "width": 912,
+    "height": 612,
+    "variants": [
+      {
+        "src": "/assets/responsive/VBCI-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_Audit_QAI_image2.webp": {
+    "width": 1920,
+    "height": 836,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Audit_QAI_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Audit_QAI_image2-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Audit_QAI_image2-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Laboratoire_Mobile_Mesures_Air.webp": {
+    "width": 1345,
+    "height": 1209,
+    "variants": [
+      {
+        "src": "/assets/responsive/Laboratoire_Mobile_Mesures_Air-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Laboratoire_Mobile_Mesures_Air-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Article_Impact_Industriel_image2.webp": {
+    "width": 1920,
+    "height": 3413,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image2-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image2-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Covid_QA_image2.webp": {
+    "width": 6000,
+    "height": 4000,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Covid_QA_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Covid_QA_image2-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Covid_QA_image2-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Methaniseurs_image3.webp": {
+    "width": 1920,
+    "height": 1080,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Methaniseurs_image3-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Methaniseurs_image3-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Methaniseurs_image3-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Interventions_Airea_Defense.webp": {
+    "width": 843,
+    "height": 856,
+    "variants": [
+      {
+        "src": "/assets/responsive/Interventions_Airea_Defense-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_20ans_image1.webp": {
+    "width": 1920,
+    "height": 1084,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_20ans_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_20ans_image1-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_20ans_image1-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_ZFE_2020_image1.webp": {
+    "width": 506,
+    "height": 891,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_ZFE_2020_image1-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_RSD_Marseille_image1.webp": {
+    "width": 1920,
+    "height": 1280,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_RSD_Marseille_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_RSD_Marseille_image1-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_RSD_Marseille_image1-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_20ans_image2.webp": {
+    "width": 1280,
+    "height": 622,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_20ans_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_20ans_image2-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Article_Microcapteurs_image1.webp": {
+    "width": 2468,
+    "height": 988,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image1-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image1-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Metier_Air_image3.webp": {
+    "width": 1920,
+    "height": 1280,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image3-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image3-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image3-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Serval.webp": {
+    "width": 267,
+    "height": 178,
+    "variants": []
+  },
+  "/Images/Article_Metier_Air_image4.webp": {
+    "width": 1919,
+    "height": 1275,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image4-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image4-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image4-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Ceasar_MKII.webp": {
+    "width": 834,
+    "height": 556,
+    "variants": [
+      {
+        "src": "/assets/responsive/Ceasar_MKII-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_Impact_Industriel_image1.webp": {
+    "width": 1280,
+    "height": 493,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image1-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Article_RSD_Lille_image2.webp": {
+    "width": 1280,
+    "height": 608,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_RSD_Lille_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_RSD_Lille_image2-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Article_Metier_Air_image2.webp": {
+    "width": 1920,
+    "height": 1280,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image2-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image2-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Jaguar.webp": {
+    "width": 918,
+    "height": 612,
+    "variants": [
+      {
+        "src": "/assets/responsive/Jaguar-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Airea_Entreprise.webp": {
+    "width": 1901,
+    "height": 581,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_Entreprise-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_Entreprise-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Airea_Entreprise-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Impact_Industriel_image4.webp": {
+    "width": 1920,
+    "height": 2560,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image4-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image4-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Impact_Industriel_image4-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Airea_mesure_qualite_air.webp": {
+    "width": 5312,
+    "height": 2988,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_mesure_qualite_air-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_mesure_qualite_air-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Airea_mesure_qualite_air-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Methaniseurs_image1.webp": {
+    "width": 1920,
+    "height": 816,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Methaniseurs_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Methaniseurs_image1-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Methaniseurs_image1-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Ceasar_CZ.webp": {
+    "width": 918,
+    "height": 612,
+    "variants": [
+      {
+        "src": "/assets/responsive/Ceasar_CZ-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_Modelisation3D_image1.webp": {
+    "width": 1297,
+    "height": 582,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Modelisation3D_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Modelisation3D_image1-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Griffon.webp": {
+    "width": 600,
+    "height": 408,
+    "variants": [
+      {
+        "src": "/assets/responsive/Griffon-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_Metier_Air_image1.webp": {
+    "width": 1920,
+    "height": 1439,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image1-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Metier_Air_image1-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Methaniseurs_image2.webp": {
+    "width": 478,
+    "height": 422,
+    "variants": []
+  },
+  "/Images/Article_Industrie_Lot_image1.webp": {
+    "width": 1280,
+    "height": 1720,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Industrie_Lot_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Industrie_Lot_image1-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Article_Audit_QAI_image1.webp": {
+    "width": 925,
+    "height": 616,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Audit_QAI_image1-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Article_Covid_QA_image1.webp": {
+    "width": 6000,
+    "height": 4000,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Covid_QA_image1-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Covid_QA_image1-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Covid_QA_image1-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_Microcapteurs_image2.webp": {
+    "width": 2543,
+    "height": 1130,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image2-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image2-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Article_Microcapteurs_image2-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Article_LEZ_2019_image1.webp": {
+    "width": 925,
+    "height": 579,
+    "variants": [
+      {
+        "src": "/assets/responsive/Article_LEZ_2019_image1-480.webp",
+        "width": 480
+      }
+    ]
+  },
+  "/Images/Logos_clients_AME/EPT Grand Paris Grand Est.webp": {
+    "width": 628,
+    "height": 602
+  },
+  "/Images/Logos_clients_AME/MEL.webp": {
+    "width": 303,
+    "height": 303
+  },
+  "/Images/Logos_clients_AME/SEMAPA.webp": {
+    "width": 752,
+    "height": 752
+  },
+  "/Images/Logos_clients_AME/Exia.webp": {
+    "width": 638,
+    "height": 632
+  },
+  "/Images/Logos_clients_AME/NGE.webp": {
+    "width": 617,
+    "height": 603
+  },
+  "/Images/Logos_clients_AME/Numtech.webp": {
+    "width": 752,
+    "height": 753
+  },
+  "/Images/Logos_clients_AME/Actierra.webp": {
+    "width": 636,
+    "height": 641
+  },
+  "/Images/Logos_clients_AME/Spl de l'Artois.webp": {
+    "width": 631,
+    "height": 608
+  },
+  "/Images/Logos_clients_AME/Douaisis Agglo.webp": {
+    "width": 607,
+    "height": 608
+  },
+  "/Images/Logos_clients_AME/Vinci Autoroutes.webp": {
+    "width": 361,
+    "height": 362
+  },
+  "/Images/Logos_clients_AME/MA-GEO.webp": {
+    "width": 300,
+    "height": 302
+  },
+  "/Images/Logos_clients_AME/Icade.webp": {
+    "width": 640,
+    "height": 640
+  },
+  "/Images/Logos_clients_AME/Kaufman & Broad.webp": {
+    "width": 751,
+    "height": 752
+  },
+  "/Images/Logos_clients_AME/Espaces Ferroviaires.webp": {
+    "width": 320,
+    "height": 320
+  },
+  "/Images/Logos_clients_AME/Grand Paris Aménagement.webp": {
+    "width": 302,
+    "height": 302
+  },
+  "/Images/Logos_clients_AME/Orléans Métropole.webp": {
+    "width": 627,
+    "height": 608
+  },
+  "/Images/Logos_clients_AME/Sequano.webp": {
+    "width": 303,
+    "height": 303
+  },
+  "/Images/Logos_clients_AME/Euralille SPL.webp": {
+    "width": 752,
+    "height": 752
+  },
+  "/Images/Logos_clients_AME/Frey.webp": {
+    "width": 359,
+    "height": 362
+  },
+  "/Images/Logos_clients_AME/Trans-Faire.webp": {
+    "width": 301,
+    "height": 302
+  },
+  "/Images/Logos_clients_AME/CC Roumois Seine.webp": {
+    "width": 614,
+    "height": 601
+  },
+  "/Images/Logos_clients_AME/Aria Technologies.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AME/Verdi Conseil Nord de France.webp": {
+    "width": 495,
+    "height": 449
+  },
+  "/Images/Logos_clients_AME/Confluences IC.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AME/Bouygues Immobilier.webp": {
+    "width": 361,
+    "height": 362
+  },
+  "/Images/Logos_clients_AME/Ville de Bayonne.webp": {
+    "width": 360,
+    "height": 361
+  },
+  "/Images/Logos_clients_AME/Sogeprom.webp": {
+    "width": 750,
+    "height": 752
+  },
+  "/Images/Logos_clients_AME/Sorgem.webp": {
+    "width": 360,
+    "height": 362
+  },
+  "/Images/Logos_clients_AME/EPAURIF.webp": {
+    "width": 499,
+    "height": 499
+  },
+  "/Images/Logos_clients_AME/La Celle Saint-Cloud.webp": {
+    "width": 451,
+    "height": 422
+  },
+  "/Images/Logos_clients_AME/Urban Eco.webp": {
+    "width": 207,
+    "height": 207
+  },
+  "/Images/Logos_clients_AME/Ville de la Celle Saint-Cloud.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AME/CA de Cambrai.webp": {
+    "width": 607,
+    "height": 607
+  },
+  "/Images/Logos_clients_AME/Eco-Stratégie.webp": {
+    "width": 482,
+    "height": 483
+  },
+  "/Images/Logos_clients_AME/Demathieu Bard.webp": {
+    "width": 636,
+    "height": 641
+  },
+  "/Images/Logos_clients_AME/SET.webp": {
+    "width": 303,
+    "height": 302
+  },
+  "/Images/Logos_clients_AME/Semavo.webp": {
+    "width": 302,
+    "height": 302
+  },
+  "/Images/Logos_clients_AME/3F Normanvie.webp": {
+    "width": 627,
+    "height": 607
+  },
+  "/Images/Logos_clients_AME/Quartus.webp": {
+    "width": 2084,
+    "height": 2084
+  },
+  "/Images/Logos_clients_AME/Clorélice.webp": {
+    "width": 790,
+    "height": 790
+  },
+  "/Images/Logos_clients_AME/EPA Marne.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_AME/Ingetec.webp": {
+    "width": 400,
+    "height": 400
+  },
+  "/Images/Logos_clients_AME/SCE.webp": {
+    "width": 303,
+    "height": 303
+  },
+  "/Images/Logos_clients_AME/Lidl.webp": {
+    "width": 302,
+    "height": 303
+  },
+  "/Images/Logos_clients_AME/Nexity.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AME/Ingérop.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AME/EPI 78-92.webp": {
+    "width": 302,
+    "height": 303
+  },
+  "/Images/Logos_clients_AME/Urbycom.webp": {
+    "width": 207,
+    "height": 208
+  },
+  "/Images/Logos_clients_ICPE/Ikos.webp": {
+    "width": 359,
+    "height": 362
+  },
+  "/Images/Logos_clients_ICPE/Antea_Group.webp": {
+    "width": 233,
+    "height": 234
+  },
+  "/Images/Logos_clients_ICPE/Numtech.webp": {
+    "width": 310,
+    "height": 80
+  },
+  "/Images/Logos_clients_ICPE/Suez.webp": {
+    "width": 231,
+    "height": 233
+  },
+  "/Images/Logos_clients_ICPE/Imerys.webp": {
+    "width": 687,
+    "height": 677
+  },
+  "/Images/Logos_clients_ICPE/Socotec.webp": {
+    "width": 525,
+    "height": 525
+  },
+  "/Images/Logos_clients_ICPE/Swiss_Krono.webp": {
+    "width": 232,
+    "height": 233
+  },
+  "/Images/Logos_clients_ICPE/Neodyme.webp": {
+    "width": 302,
+    "height": 302
+  },
+  "/Images/Logos_clients_ICPE/Setec_Environnement.webp": {
+    "width": 690,
+    "height": 676
+  },
+  "/Images/Logos_clients_ICPE/Carso.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_ICPE/ANDRA.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_ICPE/Lafarge_Holcim.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_ICPE/Sogeti_Ingenierie.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_ICPE/Aria_Technologies.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_ICPE/Albioma.webp": {
+    "width": 232,
+    "height": 233
+  },
+  "/Images/Logos_clients_ICPE/SNCF_Reseau.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_ICPE/Albatros_Energy_Mali.webp": {
+    "width": 233,
+    "height": 232
+  },
+  "/Images/Logos_clients_ICPE/Petrobras.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_ICPE/SMET_71.webp": {
+    "width": 314,
+    "height": 316
+  },
+  "/Images/Logos_clients_ICPE/Ecogeos.webp": {
+    "width": 314,
+    "height": 315
+  },
+  "/Images/Logos_clients_ICPE/Belergia.webp": {
+    "width": 603,
+    "height": 239
+  },
+  "/Images/Logos_clients_ICPE/Thyssenkrupp.webp": {
+    "width": 233,
+    "height": 233
+  },
+  "/Images/Logos_clients_ICPE/Otis.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_AXE/MEL.webp": {
+    "width": 303,
+    "height": 303
+  },
+  "/Images/Logos_clients_AXE/Antea_Group.webp": {
+    "width": 350,
+    "height": 350
+  },
+  "/Images/Logos_clients_AXE/Numtech.webp": {
+    "width": 693,
+    "height": 704
+  },
+  "/Images/Logos_clients_AXE/MAGEO.webp": {
+    "width": 300,
+    "height": 302
+  },
+  "/Images/Logos_clients_AXE/Actierra.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_AXE/SNCF Voyageurs.webp": {
+    "width": 660,
+    "height": 662
+  },
+  "/Images/Logos_clients_AXE/AEPE_Gingko.webp": {
+    "width": 701,
+    "height": 706
+  },
+  "/Images/Logos_clients_AXE/SNCF_Espaces_Ferroviaires.webp": {
+    "width": 320,
+    "height": 320
+  },
+  "/Images/Logos_clients_AXE/APRR.webp": {
+    "width": 678,
+    "height": 677
+  },
+  "/Images/Logos_clients_AXE/Département_35.webp": {
+    "width": 701,
+    "height": 702
+  },
+  "/Images/Logos_clients_AXE/Grand_Paris_Aménagement.webp": {
+    "width": 302,
+    "height": 302
+  },
+  "/Images/Logos_clients_AXE/PMM.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_AXE/Verdi.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_AXE/Aria_Technologies.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AXE/Département_62.webp": {
+    "width": 705,
+    "height": 706
+  },
+  "/Images/Logos_clients_AXE/Setec_als.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_AXE/Ingerop.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_AXE/Cofiroute.webp": {
+    "width": 250,
+    "height": 217
+  },
+  "/Images/Logos_clients_AXE/VNF.webp": {
+    "width": 592,
+    "height": 592
+  },
+  "/Images/Logos_clients_AXE/Ingetec.webp": {
+    "width": 662,
+    "height": 662
+  },
+  "/Images/Logos_clients_AXE/Vinci_Autoroutes.webp": {
+    "width": 361,
+    "height": 362
+  },
+  "/Images/Logos_clients_AXE/Sanef.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_FOR/Antea_Group.webp": {
+    "width": 687,
+    "height": 677
+  },
+  "/Images/Logos_clients_FOR/ADEME.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_FOR/Suez.webp": {
+    "width": 231,
+    "height": 233
+  },
+  "/Images/Logos_clients_FOR/Neodyme.webp": {
+    "width": 302,
+    "height": 302
+  },
+  "/Images/Logos_clients_FOR/MAIF.webp": {
+    "width": 449,
+    "height": 423
+  },
+  "/Images/Logos_clients_FOR/Ville _Antony.webp": {
+    "width": 366,
+    "height": 361
+  },
+  "/Images/Logos_clients_FOR/Ville_Saint_Maur.webp": {
+    "width": 450,
+    "height": 423
+  },
+  "/Images/Logos_clients_FOR/Ibis_Consulting.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_FOR/Ville_Lille.webp": {
+    "width": 367,
+    "height": 363
+  },
+  "/Images/Logos_clients_FOR/IKEA.webp": {
+    "width": 527,
+    "height": 527
+  },
+  "/Images/Logos_clients_FOR/LNE.webp": {
+    "width": 421,
+    "height": 422
+  },
+  "/Images/Logos_clients_FOR/SOLIDEO.webp": {
+    "width": 367,
+    "height": 362
+  },
+  "/Images/Logos_clients_FOR/Ville_Paris.webp": {
+    "width": 326,
+    "height": 325
+  },
+  "/Images/Logos_clients_FOR/Ministere_Maroc_Environnement.webp": {
+    "width": 421,
+    "height": 422
+  },
+  "/Images/Logos_clients_FOR/Region_Nouvelle_Aquitaine.webp": {
+    "width": 421,
+    "height": 422
+  },
+  "/Images/Logos_clients_FOR/Fimea.webp": {
+    "width": 837,
+    "height": 800
+  },
+  "/Images/Logos_client_ARM/Ministere_Intérieur.webp": {
+    "width": 601,
+    "height": 602
+  },
+  "/Images/Logos_client_ARM/Lacroix.webp": {
+    "width": 767,
+    "height": 751
+  },
+  "/Images/Logos_client_ARM/Neodyme.webp": {
+    "width": 302,
+    "height": 302
+  },
+  "/Images/Logos_client_ARM/Dassault_Falcon_Service.webp": {
+    "width": 362,
+    "height": 362
+  },
+  "/Images/Logos_client_ARM/Alsétex.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_client_ARM/KNDS.webp": {
+    "width": 783,
+    "height": 786
+  },
+  "/Images/Logos_client_ARM/CTA_International.webp": {
+    "width": 366,
+    "height": 362
+  },
+  "/Images/Logos_client_ARM/CEA.webp": {
+    "width": 361,
+    "height": 362
+  },
+  "/Images/Logos_client_ARM/DGA.webp": {
+    "width": 445,
+    "height": 445
+  },
+  "/Images/Logos_clients_BAT/Département_77.webp": {
+    "width": 324,
+    "height": 325
+  },
+  "/Images/Logos_clients_BAT/Ville_Montpellier.webp": {
+    "width": 302,
+    "height": 303
+  },
+  "/Images/Logos_clients_BAT/PEMB.webp": {
+    "width": 788,
+    "height": 793
+  },
+  "/Images/Logos_clients_BAT/Givenchy.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_BAT/Oscaro.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_BAT/Icade.webp": {
+    "width": 640,
+    "height": 640
+  },
+  "/Images/Logos_clients_BAT/Vinci_Immobilier.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_BAT/Opera_National_Paris.webp": {
+    "width": 360,
+    "height": 360
+  },
+  "/Images/Logos_clients_BAT/BG_Ingenieurs_Conseils.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_BAT/France_Travail.webp": {
+    "width": 677,
+    "height": 677
+  },
+  "/Images/Logos_clients_BAT/CNRS.webp": {
+    "width": 302,
+    "height": 304
+  },
+  "/Images/Logos_clients_BAT/Ville_Pantin.webp": {
+    "width": 314,
+    "height": 313
+  },
+  "/Images/Logos_clients_BAT/Ministere_Justice.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_BAT/GLS_France.webp": {
+    "width": 302,
+    "height": 304
+  },
+  "/Images/Logos_clients_BAT/Universite_Bourgogne.webp": {
+    "width": 315,
+    "height": 316
+  },
+  "/Images/Logos_clients_BAT/Bouygues_Batiment_IDF.webp": {
+    "width": 790,
+    "height": 792
+  },
+  "/Images/Logos_clients_BAT/Bouygues Immobilier.webp": {
+    "width": 361,
+    "height": 362
+  },
+  "/Images/Logos_clients_BAT/BGL_BNP_Paribas.webp": {
+    "width": 421,
+    "height": 423
+  },
+  "/Images/Logos_clients_BAT/Ville_Reuil_Malmaison.webp": {
+    "width": 400,
+    "height": 400
+  },
+  "/Images/Logos_clients_BAT/Axess.webp": {
+    "width": 791,
+    "height": 790
+  },
+  "/Images/Logos_clients_BAT/Kaufman_Broad.webp": {
+    "width": 302,
+    "height": 303
+  },
+  "/Images/Logos_clients_BAT/Universite_Rouen.webp": {
+    "width": 787,
+    "height": 791
+  },
+  "/Images/Logos_clients_BAT/Agenda_Diagnostics.webp": {
+    "width": 225,
+    "height": 225
+  },
+  "/Images/Logos_clients_BAT/Ville_Nogent_sur_Marne.webp": {
+    "width": 752,
+    "height": 752
+  },
+  "/Images/Logos_clients_BAT/Novaxia.webp": {
+    "width": 662,
+    "height": 662
+  },
+  "/Images/Logos_clients_BAT/BTP_Consultants.webp": {
+    "width": 750,
+    "height": 753
+  },
+  "/Images/Logos_clients_BAT/Bleu_Libellule.webp": {
+    "width": 600,
+    "height": 600
+  },
+  "/Images/Logos_clients_BAT/Radio_France.webp": {
+    "width": 751,
+    "height": 752
+  },
+  "/Images/Logos_clients_BAT/SNCF.webp": {
+    "width": 302,
+    "height": 303
+  },
+  "/Images/Logos_clients_BAT/Ville_Paris.webp": {
+    "width": 326,
+    "height": 325
+  },
+  "/Images/Logos_clients_BAT/Areva.webp": {
+    "width": 422,
+    "height": 421
+  },
+  "/Images/Logos_clients_BAT/La_Poste.webp": {
+    "width": 303,
+    "height": 305
+  },
+  "/Images/Logos_clients_BAT/Atelier_des_Compagnons.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_BAT/Elan_France.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_BAT/Fimea.webp": {
+    "width": 787,
+    "height": 791
+  },
+  "/Images/Logos_clients_CHA/Capocci.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_CHA/Société_Grand_Paris.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_CHA/Petit_Construction.webp": {
+    "width": 200,
+    "height": 200
+  },
+  "/Images/Logos_clients_CHA/AIRTControle.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_CHA/Soletanche_Bachy.webp": {
+    "width": 233,
+    "height": 232
+  },
+  "/Images/Logos_clients_CHA/Sequano.webp": {
+    "width": 303,
+    "height": 303
+  },
+  "/Images/Logos_clients_CHA/Melchiorre_SA.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_CHA/Rincent_Airports.webp": {
+    "width": 230,
+    "height": 231
+  },
+  "/Images/Logos_clients_CHA/GCC_Ile_de_France.webp": {
+    "width": 604,
+    "height": 603
+  },
+  "/Images/Logos_clients_CHA/Vinci_Construction_Terassement.webp": {
+    "width": 231,
+    "height": 233
+  },
+  "/Images/Logos_clients_CHA/Razel_Bec.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Logos_clients_CHA/Sarpi_Veolia.webp": {
+    "width": 390,
+    "height": 382
+  },
+  "/Images/Logos_clients_CHA/Bouygues_Construction.webp": {
+    "width": 231,
+    "height": 232
+  },
+  "/Images/Logos_clients_CHA/Nexity.webp": {
+    "width": 400,
+    "height": 400
+  },
+  "/Images/Logos_clients_CHA/BNP_Paribas_Real_Estate.webp": {
+    "width": 232,
+    "height": 232
+  },
+  "/Images/Secteurs/Airea_secteur_IND.webp": {
+    "width": 1920,
+    "height": 1920,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_IND-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_IND-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_IND-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_ARM.webp": {
+    "width": 1254,
+    "height": 1254,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_ARM-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_ARM-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_AXE.webp": {
+    "width": 1024,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_AXE-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_AXE-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_RSD.webp": {
+    "width": 1024,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_RSD-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_RSD-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_FOR.webp": {
+    "width": 1024,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_FOR-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_FOR-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_BAT.webp": {
+    "width": 1024,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_BAT-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_BAT-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_CHA.webp": {
+    "width": 1024,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_CHA-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_CHA-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "/Images/Secteurs/Airea_secteur_AME.webp": {
+    "width": 1024,
+    "height": 1024,
+    "variants": [
+      {
+        "src": "/assets/responsive/Airea_secteur_AME-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/assets/responsive/Airea_secteur_AME-960.webp",
+        "width": 960
+      }
+    ]
+  }
+}

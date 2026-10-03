@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moteur de recherche VLEP / VLCT</title>
+
+  <style>
+    :root{
+      /* Background blanc */
+      --bg:#ffffff;
+
+      /* Panneaux légèrement contrastés pour ressortir sur fond blanc */
+      --panel:#ffffff;
+      --panel2:#ffffff;
+
+      --border:rgba(15,23,42,.12);
+      --text:#0f172a;
+      --muted:#64748b;
+
+      /* Bleu uniquement */
+      --blue:#00305b;
+      --blue2:#00a3ff;
+      --blueSoft:rgba(0,123,255,.10);
+
+      --radius:18px;
+
+      /* Ombre un peu plus visible (fond blanc) */
+      --shadow:0 14px 34px rgba(2,6,23,.10);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: var(--bg);
+      color: var(--text);
+      padding: 28px 16px 48px;
+    }
+
+    .app{ max-width: 1000px; margin: 0 auto; }
+
+    .topbar{ margin-bottom: 16px; }
+    .brand-title{
+      margin:0;
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: .2px;
+      color: var(--blue);
+    }
+    .brand-subtitle{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .controls{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap: 12px;
+      align-items:center;
+    }
+
+    .toggle{
+      display:flex;
+      gap: 6px;
+      padding: 5px;
+      border-radius: 999px;
+      background: rgba(2, 6, 23, .04);
+      border: 1px solid rgba(15,23,42,.10);
+    }
+    .toggle button{
+      border:0;
+      background: transparent;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight: 850;
+      color: var(--muted);
+      transition: .12s ease;
+    }
+    .toggle button.active{
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 10px 22px rgba(0,123,255,.22);
+    }
+
+    .btn{
+      border: 1px solid var(--border);
+      background: white;
+      padding: 9px 14px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 800;
+      color: var(--text);
+      transition: .12s ease;
+    }
+    .btn:hover{ box-shadow: 0 10px 22px rgba(2,6,23,.08); }
+    .btn:active{ transform: translateY(1px); }
+
+    .search-row{ margin-top: 14px; position: relative; }
+
+    .input-wrap{ position:relative; }
+
+    input{
+      width:100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      background: white;
+      color: var(--text);
+      outline: none;
+      box-shadow: 0 12px 26px rgba(2,6,23,.06);
+    }
+    input::placeholder{ color: #64748b; }
+    input:focus{
+      border-color: rgba(0,123,255,.50);
+      box-shadow: 0 0 0 4px rgba(0,123,255,.14), 0 12px 26px rgba(2,6,23,.08);
+    }
+
+    .suggestions{
+      position:absolute;
+      top: calc(100% + 8px);
+      left:0; right:0;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow:auto;
+      max-height: 240px;
+      display:none;
+      z-index: 10;
+      box-shadow: 0 18px 44px rgba(2,6,23,.14);
+    }
+    .suggestions .item{
+      padding: 10px 12px;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      align-items:baseline;
+      border-top: 1px solid rgba(15,23,42,.07);
+    }
+    .suggestions .item:first-child{ border-top:0; }
+    .suggestions .item:hover{ background: var(--blueSoft); }
+    .suggestions .hint{ color: var(--muted); font-size: .85rem; white-space:nowrap; }
+
+    .grid{ margin-top: 18px; display:grid; gap: 14px; }
+
+    .card{
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .card h2{
+      margin: 0 0 8px 0;
+      font-size: 1.15rem;
+      font-weight: 950;
+      letter-spacing: .2px;
+    }
+
+    .meta{
+      color: var(--muted);
+      font-size: .92rem;
+      margin: 0 0 12px 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: rgba(2, 6, 23, .02);
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 260px 1fr;
+      gap: 8px 12px;
+    }
+    @media (max-width: 720px){
+      .kv{ grid-template-columns: 1fr; }
+    }
+    .k{ font-weight: 900; color: var(--muted); }
+    .v{ color: var(--text); }
+
+    .section-gap{ height: 14px; }
+
+    .est{
+      color: #b45309;
+      font-style: italic;
+      margin-left: 8px;
+      font-size: .92rem;
+    }
+
+    .empty{
+      color: var(--muted);
+      padding: 14px;
+      border: 1px dashed rgba(15,23,42,.22);
+      border-radius: var(--radius);
+      background: rgba(2,6,23,.02);
+    }
+
+    .anses-note{
+      margin-top: 10px;
+      font-size: .86rem;
+      color: rgba(15,23,42,.72);
+      font-style: italic;
+      line-height: 1.35;
+    }
+  </style>
+<link rel="stylesheet" href="/assets/fonts/fonts.css"><style>body,input,select,button{font-family:Montserrat,sans-serif!important}</style></head>
+
+<body>
+  <div class="app">
+    <div class="topbar">
+      <h1 class="brand-title">Moteur de recherche VLEP / VLCT</h1>
+      <div class="brand-subtitle">Mise à jour de la base de données le 14/01/2026</div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="toggle" role="tablist" aria-label="Mode de recherche">
+          <button id="btnMol" class="active" onclick="setMode('mol')" role="tab" aria-selected="true">Nom</button>
+          <button id="btnCas" onclick="setMode('cas')" role="tab" aria-selected="false">N° CAS</button>
+        </div>
+
+        <button class="btn" onclick="resetForm()">Réinitialiser</button>
+      </div>
+
+      <div class="search-row">
+        <div class="input-wrap" id="molGroup">
+          <input
+            type="text"
+            id="molInput"
+            placeholder="Ex : benzène"
+            autocomplete="off"
+            oninput="updateSuggestions('mol')"
+            onkeydown="onEnterSearch(event, 'mol')"
+          />
+          <div id="molSuggestions" class="suggestions"></div>
+        </div>
+
+        <div class="input-wrap" id="casGroup" style="display:none;">
+          <input
+            type="text"
+            id="casInput"
+            placeholder="Ex : 71-43-2"
+            autocomplete="off"
+            oninput="updateSuggestions('cas')"
+            onkeydown="onEnterSearch(event, 'cas')"
+          />
+          <div id="casSuggestions" class="suggestions"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" id="resultsContainer"></div>
+  </div>
+
+  <script>
+    // ========= CONFIG =========
+    const CSV_URL = '/data/Export_VLEP_VLCT.csv';
+    const DELIM = ';';
+
+    const COL = {
+      nom1: 'Nom1',
+      nom2: 'Nom2',
+      nom3: 'Nom3',
+      nom4: 'Nom4',
+      cas: 'Numero CAS',
+      annee: 'Annee',
+      vlep_ppm: 'VLEP 8h (ppm)',
+      vlep_mg:  'VLEP 8h (mg/m3)',
+      vlct_ppm: 'VLEP CT (ppm)',
+      vlct_mg:  'VLEP CT (mg/m3)',
+      info1a: 'Information complémentaire 1',
+      info1b: 'Information complémentaire 1.1',
+      info2:  'Information complémentaire 2'
+    };
+
+    // ========= STATE =========
+    let data = [];
+    let mode = 'mol';
+
+    // ========= DOM helpers =========
+    function $(id){ return document.getElementById(id); }
+
+    // ========= String / Number helpers =========
+    function normalizeStr(s){
+      return (s ?? '')
+        .toString()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '')
+        .toLowerCase()
+        .trim();
+    }
+
+    function formatNumberFR(value, digits = 3){
+      if (value === null || value === undefined) return '—';
+      if (typeof value !== 'number' || !Number.isFinite(value)) return '—';
+      return new Intl.NumberFormat('fr-FR', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: digits
+      }).format(value);
+    }
+
+    function fmt(x, digits = 3){
+      if (x === null || x === undefined) return '—';
+      if (typeof x === 'number') return formatNumberFR(x, digits);
+      const s = x.toString().trim();
+      return s ? s : '—';
+    }
+
+    function toFloatOrNaN(x){
+      const s = (x ?? '').toString().trim();
+      if (!s) return NaN;
+      const v = parseFloat(s.replace(',', '.'));
+      return Number.isFinite(v) ? v : NaN;
+    }
+
+    // ========= CSV decoding + parsing =========
+    // - fetch ArrayBuffer
+    // - decode UTF-8 puis fallback ISO-8859-1 si nécessaire
+    function decodeWithFallback(buffer){
+      let txt = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
+      if (txt.includes('\uFFFD')) {
+        txt = new TextDecoder('iso-8859-1', { fatal: false }).decode(buffer);
+      }
+      return txt;
+    }
+
+    // Parse CSV ; gestion guillemets + entêtes dupliquées
+    function parseCSV(text, delimiter){
+      const rows = [];
+      let row = [];
+      let cur = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++){
+        const ch = text[i];
+        const next = text[i+1];
+
+        if (ch === '"'){
+          if (inQuotes && next === '"'){ cur += '"'; i++; }
+          else { inQuotes = !inQuotes; }
+          continue;
+        }
+
+        if (!inQuotes && ch === delimiter){
+          row.push(cur); cur = '';
+          continue;
+        }
+
+        if (!inQuotes && (ch === '\n' || ch === '\r')){
+          if (ch === '\r' && next === '\n') i++;
+          row.push(cur); cur = '';
+          if (row.some(v => v !== '')) rows.push(row);
+          row = [];
+          continue;
+        }
+
+        cur += ch;
+      }
+      row.push(cur);
+      if (row.some(v => v !== '')) rows.push(row);
+
+      if (rows.length === 0) return [];
+
+      // entêtes uniques si duplicats
+      const rawHeaders = rows[0].map(h => (h ?? '').trim());
+      const counts = new Map();
+      const headers = rawHeaders.map(h => {
+        const key = h || '';
+        const n = counts.get(key) ?? 0;
+        counts.set(key, n + 1);
+        return n === 0 ? key : `${key}.${n}`;
+      });
+
+      const out = [];
+      for (let r = 1; r < rows.length; r++){
+        const obj = {};
+        for (let c = 0; c < headers.length; c++){
+          obj[headers[c]] = (rows[r][c] ?? '').trim();
+        }
+        out.push(obj);
+      }
+      return out;
+    }
+
+    // ========= Domain helpers =========
+    function allNames(entry){
+      return [
+        (entry[COL.nom1] ?? '').trim(),
+        (entry[COL.nom2] ?? '').trim(),
+        (entry[COL.nom3] ?? '').trim(),
+        (entry[COL.nom4] ?? '').trim(),
+      ].filter(Boolean);
+    }
+
+    function safeInfo1(entry){
+      const a = (entry[COL.info1a] ?? '').trim();
+      const b = (entry[COL.info1b] ?? '').trim();
+      return a || b;
+    }
+
+    function buildComplementaryInfo(entry){
+      const info1 = safeInfo1(entry);
+      const info2 = (entry[COL.info2] ?? '').trim();
+      if (info1 && info2) return info1 + '\n' + info2;
+      if (info1) return info1;
+      if (info2) return info2;
+      return 'Non renseigné';
+    }
+
+    function uniqueNonEmpty(arr){
+      const seen = new Set();
+      const out = [];
+      for (const x of arr){
+        const v = (x ?? '').toString().trim();
+        if (!v) continue;
+        const k = normalizeStr(v);
+        if (seen.has(k)) continue;
+        seen.add(k);
+        out.push(v);
+      }
+      return out;
+    }
+
+    // Similarité: exact > startsWith > includes > préfixe approximatif
+    function scoreCandidate(candidate, query){
+      const c = normalizeStr(candidate);
+      const q = normalizeStr(query);
+      if (!q) return 0;
+      if (c === q) return 1.0;
+      if (c.startsWith(q)) return 0.9;
+      if (c.includes(q)) return 0.65;
+
+      const minLen = Math.min(c.length, q.length);
+      let matches = 0;
+      for (let i = 0; i < minLen; i++){
+        if (c[i] === q[i]) matches++;
+      }
+      return matches / Math.max(q.length, 1);
+    }
+
+    // ========= UI =========
+    function setMode(next){
+      mode = next;
+      $('btnMol').classList.toggle('active', mode === 'mol');
+      $('btnCas').classList.toggle('active', mode === 'cas');
+      $('btnMol').setAttribute('aria-selected', mode === 'mol');
+      $('btnCas').setAttribute('aria-selected', mode === 'cas');
+
+      $('molGroup').style.display = mode === 'mol' ? 'block' : 'none';
+      $('casGroup').style.display = mode === 'cas' ? 'block' : 'none';
+
+      resetForm(false);
+      (mode === 'mol' ? $('molInput') : $('casInput')).focus();
+    }
+
+    function closeSuggestions(){
+      $('molSuggestions').style.display = 'none';
+      $('casSuggestions').style.display = 'none';
+      $('molSuggestions').innerHTML = '';
+      $('casSuggestions').innerHTML = '';
+    }
+
+    function resetForm(){
+      $('molInput').value = '';
+      $('casInput').value = '';
+      closeSuggestions();
+      $('resultsContainer').innerHTML = '';
+    }
+
+    function onEnterSearch(evt, type){
+      if (evt.key !== 'Enter') return;
+      evt.preventDefault();
+      showResult(type);
+      closeSuggestions();
+    }
+
+    function updateSuggestions(type){
+      const inputEl = type === 'mol' ? $('molInput') : $('casInput');
+      const box = type === 'mol' ? $('molSuggestions') : $('casSuggestions');
+      const q = inputEl.value;
+
+      box.innerHTML = '';
+      if (!q || q.trim().length < 2){
+        box.style.display = 'none';
+        return;
+      }
+
+      let candidates = [];
+      if (type === 'cas'){
+        candidates = uniqueNonEmpty(data.map(e => e[COL.cas]));
+      } else {
+        const names = [];
+        for (const e of data){
+          for (const n of allNames(e)) names.push(n);
+        }
+        candidates = uniqueNonEmpty(names);
+      }
+
+      const threshold = 0.40;
+      const scored = candidates
+        .map(name => ({ name, score: scoreCandidate(name, q) }))
+        .filter(o => o.score >= threshold)
+        .sort((a,b) => b.score - a.score)
+        .slice(0, 10);
+
+      if (scored.length === 0){
+        box.style.display = 'none';
+        return;
+      }
+
+      for (const o of scored){
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `<span>${o.name}</span><span class="hint">${type === 'cas' ? 'CAS' : 'Nom'}</span>`;
+        div.onclick = () => {
+          inputEl.value = o.name;
+          closeSuggestions();
+          showResult(type);
+        };
+        box.appendChild(div);
+      }
+      box.style.display = 'block';
+    }
+
+    function showResult(type){
+      const container = $('resultsContainer');
+      container.innerHTML = '';
+
+      if (!data.length){
+        container.innerHTML = `<div class="empty">Données non chargées.</div>`;
+        return;
+      }
+
+      const queryName = normalizeStr($('molInput').value);
+      const queryCas  = normalizeStr($('casInput').value);
+
+      let entry = null;
+
+      if (type === 'cas' && queryCas){
+        entry = data.find(e => normalizeStr(e[COL.cas]) === queryCas);
+      } else if (type === 'mol' && queryName){
+        entry = data.find(e => allNames(e).map(normalizeStr).includes(queryName));
+      } else {
+        return;
+      }
+
+      if (!entry){
+        container.innerHTML = `<div class="empty">Aucun résultat exact. Choisis une suggestion.</div>`;
+        return;
+      }
+
+      const vlep_ppm = toFloatOrNaN(entry[COL.vlep_ppm]);
+      const vlep_mg  = toFloatOrNaN(entry[COL.vlep_mg]);
+      const vlct_ppm = toFloatOrNaN(entry[COL.vlct_ppm]);
+      const vlct_mg  = toFloatOrNaN(entry[COL.vlct_mg]);
+
+      // Estimation conservée + affichée uniquement si utilisée
+      const canEstVlep =
+        (Number.isNaN(vlep_ppm) && Number.isNaN(vlep_mg)) &&
+        (!Number.isNaN(vlct_ppm) || !Number.isNaN(vlct_mg));
+
+      const canEstVlct =
+        (Number.isNaN(vlct_ppm) && Number.isNaN(vlct_mg)) &&
+        (!Number.isNaN(vlep_ppm) || !Number.isNaN(vlep_mg));
+
+      const final_vlep_ppm = (Number.isNaN(vlep_ppm) && !Number.isNaN(vlct_ppm)) ? (vlct_ppm / 5) : vlep_ppm;
+      const final_vlep_mg  = (Number.isNaN(vlep_mg)  && !Number.isNaN(vlct_mg))  ? (vlct_mg  / 5) : vlep_mg;
+
+      const final_vlct_ppm = (Number.isNaN(vlct_ppm) && !Number.isNaN(vlep_ppm)) ? (vlep_ppm * 5) : vlct_ppm;
+      const final_vlct_mg  = (Number.isNaN(vlct_mg)  && !Number.isNaN(vlep_mg))  ? (vlep_mg  * 5) : vlct_mg;
+
+      const vlep_ug = !Number.isNaN(final_vlep_mg) ? (final_vlep_mg * 1000) : NaN;
+      const vlct_ug = !Number.isNaN(final_vlct_mg) ? (final_vlct_mg * 1000) : NaN;
+
+      const names = allNames(entry);
+      const primary = names[0] || 'Substance';
+      const aliases = names.slice(1);
+
+      const cas  = (entry[COL.cas] ?? '').trim();
+      const annee = (entry[COL.annee] ?? '').trim() || '—';
+
+      const compInfo = buildComplementaryInfo(entry).replace(/\n/g, '<br/>');
+
+      // Texte demandé (sans "×5" et sans "/5" dans le libellé)
+      const estVlepLabel = canEstVlep ? `<span class="est">(estimée à partir de la VLCT)</span>` : '';
+      const estVlctLabel = canEstVlct ? `<span class="est">(estimée à partir de la VLEP)</span>` : '';
+
+      const hasAnyEstimation = canEstVlep || canEstVlct;
+
+      const ansesNote = hasAnyEstimation ? `
+        <div class="anses-note">
+          <br/>
+          Pour les agents chimiques pour lesquels soit une VLCT soit une VLEP-8h n’ont pas été fixées, l’ANSES recommande que :
+          <br/>● si une VLCT n’est pas fixée, ne pas dépasser cinq fois la VLEP-8h pendant 15 minutes ;
+          <br/>● si une VLEP-8h n’est pas fixée, ne pas dépasser 1/5 de la VLCT-15min.
+        </div>
+      ` : '';
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <h2>${primary}</h2>
+        <div class="meta">
+          <span class="badge">CAS : <strong>${cas || '—'}</strong></span>
+          <span class="badge">Année : <strong>${annee}</strong></span>
+          ${aliases.length ? `<span class="badge">Alias : <strong>${aliases.join(' · ')}</strong></span>` : ''}
+        </div>
+
+        <!-- VLEP -->
+        <div class="kv">
+          <div class="k">VLEP-8h (ppm)</div>
+          <div class="v">${fmt(final_vlep_ppm, 3)} ppm ${estVlepLabel}</div>
+
+          <div class="k">VLEP-8h (mg/m³)</div>
+          <div class="v">${fmt(final_vlep_mg, 3)} mg/m³ ${estVlepLabel}</div>
+
+          <div class="k">VLEP-8h (µg/m³)</div>
+          <div class="v">${Number.isNaN(vlep_ug) ? '—' : fmt(vlep_ug, 1)} µg/m³ ${estVlepLabel}</div>
+        </div>
+
+        <div class="section-gap"></div>
+
+        <!-- VLCT -->
+        <div class="kv">
+          <div class="k">VLCT (ppm)</div>
+          <div class="v">${fmt(final_vlct_ppm, 3)} ppm ${estVlctLabel}</div>
+
+          <div class="k">VLCT (mg/m³)</div>
+          <div class="v">${fmt(final_vlct_mg, 3)} mg/m³ ${estVlctLabel}</div>
+
+          <div class="k">VLCT (µg/m³)</div>
+          <div class="v">${Number.isNaN(vlct_ug) ? '—' : fmt(vlct_ug, 1)} µg/m³ ${estVlctLabel}</div>
+        </div>
+
+        <div class="section-gap"></div>
+
+        <!-- Info complémentaire -->
+        <div class="kv">
+          <div class="k">Information complémentaire</div>
+          <div class="v">${compInfo}</div>
+        </div>
+
+        ${ansesNote}
+      `;
+      container.appendChild(card);
+    }
+
+    // ========= Load data =========
+    async function loadData(){
+      try{
+        const res = await fetch(CSV_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const buf = await res.arrayBuffer();
+        const text = decodeWithFallback(buf);
+
+        data = parseCSV(text, DELIM);
+      } catch (e){
+        console.error(e);
+        $('resultsContainer').innerHTML = `<div class="empty">Impossible de charger le CSV (URL/CORS/serveur).</div>`;
+      }
+    }
+
+    // Clic extérieur => ferme suggestions
+    document.addEventListener('click', (evt) => {
+      const ms = $('molSuggestions');
+      const cs = $('casSuggestions');
+      const mi = $('molInput');
+      const ci = $('casInput');
+      if (ms.contains(evt.target) || cs.contains(evt.target) || evt.target === mi || evt.target === ci) return;
+      closeSuggestions();
+    });
+
+    loadData();
+  </script>
+</body>
+</html>

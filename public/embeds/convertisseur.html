@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f7f8">
+  <title>Airea · Convertisseur de concentrations</title>
+  
+  
+  
+
+  <style>
+    :root {
+      --blue: #0f4c85;
+      --blue-dark: #00305b;
+      --blue-soft: #edf5fb;
+      --ink: #172433;
+      --muted: #5c6b79;
+      --background: #f4f7f8;
+      --surface: #ffffff;
+      --line: #dce5eb;
+      --error: #b93838;
+      --radius: 18px;
+      --control-radius: 10px;
+      --shadow: 0 18px 55px rgba(22, 48, 70, .11);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-height: 0; }
+
+    body {
+      min-height: 0;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(15, 76, 133, .11), transparent 28rem),
+        radial-gradient(circle at 100% 100%, rgba(15, 76, 133, .05), transparent 25rem),
+        var(--background);
+      font-family: "Manrope", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select { font: inherit; }
+
+    .app {
+      width: min(820px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 32px;
+    }
+
+    .title-block {
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      color: var(--blue-dark);
+      font-size: clamp(1.55rem, 4vw, 2.15rem);
+      font-weight: 700;
+      letter-spacing: -.045em;
+      line-height: 1.12;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .converter {
+      overflow: hidden;
+      border: 1px solid rgba(15, 76, 133, .10);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .form-area { padding: 26px; }
+
+    .field {
+      min-width: 0;
+      margin-bottom: 20px;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    .field label,
+    .group-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #344454;
+      font-size: .82rem;
+      font-weight: 650;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .pollutant-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(180px, .8fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .field-row > .field,
+    .pollutant-row > .field { margin-bottom: 0; }
+
+    .pollutant-row > .error {
+      grid-column: 1 / -1;
+      margin-top: -8px;
+    }
+
+    .concentration-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(135px, .8fr) minmax(120px, .65fr);
+      gap: 12px;
+    }
+
+    input, select {
+      width: 100%;
+      height: 46px;
+      padding: 0 13px;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: var(--control-radius);
+      background: #fbfcfd;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    select {
+      padding-right: 34px;
+      cursor: pointer;
+    }
+
+    input:hover, select:hover { border-color: #b9c8d3; }
+
+    input:focus, select:focus {
+      border-color: var(--blue);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15, 76, 133, .11);
+    }
+
+    input[readonly] {
+      color: #647481;
+      border-color: #dfe5e9;
+      background: #edf1f3;
+      cursor: not-allowed;
+    }
+
+    input[readonly]:focus {
+      border-color: #dfe5e9;
+      background: #edf1f3;
+      box-shadow: none;
+    }
+
+    input::placeholder { color: #5c6b79; }
+
+    .input-with-unit { position: relative; }
+
+    .input-with-unit input { padding-right: 52px; }
+
+    .input-suffix {
+      position: absolute;
+      top: 50%;
+      right: 13px;
+      color: var(--muted);
+      font-size: .78rem;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
+    .error {
+      display: block;
+      min-height: 0;
+      margin-top: 6px;
+      color: var(--error);
+      font-size: .75rem;
+      line-height: 1.35;
+    }
+
+    .error:empty { display: none; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    button {
+      min-height: 46px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 11px;
+      cursor: pointer;
+      font-weight: 650;
+      transition: transform .2s var(--ease), background .2s ease, box-shadow .2s ease;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(15, 76, 133, .28);
+      outline-offset: 3px;
+    }
+
+    .primary-button {
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      box-shadow: 0 8px 20px rgba(15, 76, 133, .20);
+    }
+
+    .primary-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(15, 76, 133, .27);
+    }
+
+    .secondary-button {
+      color: var(--blue-dark);
+      background: var(--blue-soft);
+    }
+
+    .secondary-button:hover { background: #e2eef7; }
+
+    .results-section {
+      display: none;
+      padding: 22px 26px 26px;
+      border-top: 1px solid var(--line);
+      background: #f9fbfc;
+    }
+
+    .results-section.visible {
+      display: block;
+      animation: reveal .35s var(--ease) both;
+    }
+
+    .results-title {
+      margin: 0 0 13px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .result-card {
+      min-width: 0;
+      padding: 14px 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .result-value {
+      display: block;
+      overflow-wrap: anywhere;
+      color: var(--blue-dark);
+      font-size: clamp(.9rem, 2vw, 1.05rem);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .result-unit {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .app {
+        width: min(100% - 24px, 520px);
+        padding-top: 24px;
+      }
+
+      .title-block { margin-bottom: 16px; }
+      .subtitle { font-size: .8rem; }
+      .form-area { padding: 18px; }
+      .field-row { gap: 10px; }
+      .pollutant-row { gap: 10px; }
+
+      .concentration-row {
+        grid-template-columns: minmax(0, 1.3fr) minmax(94px, .7fr) minmax(82px, .6fr);
+        gap: 8px;
+      }
+
+      .concentration-row label { font-size: .74rem; }
+      input, select { height: 44px; padding-inline: 10px; font-size: .88rem; }
+      .input-with-unit input { padding-right: 42px; }
+      .input-suffix { right: 10px; }
+      .actions { grid-template-columns: 1fr; }
+      .secondary-button { order: 2; }
+      .results-section { padding: 18px; }
+      .results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 370px) {
+      .pollutant-row { grid-template-columns: 1fr; }
+      .concentration-row { grid-template-columns: 1fr 1fr; }
+      .concentration-row .value-field { grid-column: 1 / -1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+<link rel="stylesheet" href="/assets/fonts/fonts.css"><style>body,input,select,button{font-family:Montserrat,sans-serif!important}</style></head>
+
+<body>
+  <main class="app">
+    <div class="title-block">
+      <h1>Convertisseur de concentrations</h1>
+      <p class="subtitle">Conversion des concentrations gazeuses selon les conditions de température et de pression.</p>
+    </div>
+
+    <section class="converter" aria-label="Convertisseur de concentrations">
+      <div class="form-area">
+        <div class="pollutant-row">
+          <div class="field">
+            <label for="pollutant">Polluant</label>
+            <select id="pollutant">
+              <option value="" disabled selected>Choisir un polluant</option>
+              <option value="0">Autre…</option>
+              <option value="46.0055">Dioxyde d’azote (NO₂)</option>
+              <option value="30.0061">Monoxyde d’azote (NO)</option>
+              <option value="28.01">Monoxyde de carbone (CO)</option>
+              <option value="44.01">Dioxyde de carbone (CO₂)</option>
+              <option value="78.11">Benzène (C₆H₆)</option>
+              <option value="34.08">Sulfure d’hydrogène (H₂S)</option>
+              <option value="17.031">Ammoniac (NH₃)</option>
+              <option value="48.00">Ozone (O₃)</option>
+              <option value="30.026">Formaldéhyde (CH₂O)</option>
+              <option value="16.04">Méthane (CH₄)</option>
+              <option value="54.09">1,3-Butadiène (C₄H₆)</option>
+              <option value="56.11">Hydroxyde de potassium (KOH)</option>
+              <option value="27.03">Acide cyanhydrique (HCN)</option>
+              <option value="20.01">Acide fluorhydrique (HF)</option>
+              <option value="36.46">Acide chlorhydrique (HCl)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="customM">Masse molaire</label>
+            <div class="input-with-unit">
+              <input type="number" id="customM" min="0" step="any" inputmode="decimal" placeholder="—" readonly>
+              <span class="input-suffix">g/mol</span>
+            </div>
+          </div>
+          <span class="error" id="molarErr" role="alert"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="temp">Température</label>
+            <div class="input-with-unit">
+              <input type="number" id="temp" value="20" step="any" inputmode="decimal">
+              <span class="input-suffix">°C</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="press">Pression</label>
+            <div class="input-with-unit">
+              <input type="number" id="press" value="1013" min="0" step="any" inputmode="decimal">
+              <span class="input-suffix">hPa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="group-label">Concentration</span>
+          <div class="concentration-row">
+            <div class="value-field">
+              <label for="inputVal">Valeur</label>
+              <input type="number" id="inputVal" min="0" step="any" inputmode="decimal" placeholder="0">
+            </div>
+            <div>
+              <label for="inputUnit">Unité</label>
+              <select id="inputUnit">
+                <option value="ugm3">µg/m³</option>
+                <option value="mgm3">mg/m³</option>
+                <option value="ppb">ppb</option>
+                <option value="ppm">ppm</option>
+              </select>
+            </div>
+            <div>
+              <label for="decimals">Décimales</label>
+              <select id="decimals">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
+          <span class="error" id="concErr" role="alert"></span>
+        </div>
+
+        <div class="actions">
+          <button class="primary-button" id="convertBtn" type="button">Convertir</button>
+          <button class="secondary-button" id="resetBtn" type="button">Réinitialiser</button>
+        </div>
+      </div>
+
+      <div class="results-section" id="resultsSection" aria-live="polite">
+        <p class="results-title">Résultats</p>
+        <div class="results" id="results"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const R = 8.314462618;
+    const pollutant = document.getElementById('pollutant');
+    const customM = document.getElementById('customM');
+    const molarErr = document.getElementById('molarErr');
+    const concErr = document.getElementById('concErr');
+    const resultsDiv = document.getElementById('results');
+    const resultsSection = document.getElementById('resultsSection');
+
+    const units = [
+      { key: 'ngm3', label: 'ng/m³' },
+      { key: 'ugm3', label: 'µg/m³' },
+      { key: 'mgm3', label: 'mg/m³' },
+      { key: 'ppm', label: 'ppm' },
+      { key: 'ppb', label: 'ppb' }
+    ];
+
+    function clearResults() {
+      resultsDiv.replaceChildren();
+      resultsSection.classList.remove('visible');
+      molarErr.textContent = '';
+      concErr.textContent = '';
+    }
+
+    pollutant.addEventListener('change', () => {
+      clearResults();
+      const isCustom = pollutant.value === '0';
+      customM.readOnly = !isCustom;
+      customM.value = isCustom ? '' : pollutant.value;
+      customM.placeholder = isCustom ? 'Ex. 64,07' : '—';
+      if (isCustom) customM.focus();
+    });
+
+    document.querySelectorAll('input, select').forEach(element => {
+      element.addEventListener('input', clearResults);
+    });
+
+    function convert() {
+      clearResults();
+
+      if (!pollutant.value) {
+        molarErr.textContent = 'Veuillez sélectionner un polluant.';
+        pollutant.focus();
+        return;
+      }
+
+      const molarMass = Number.parseFloat(customM.value);
+
+      if (!Number.isFinite(molarMass) || molarMass <= 0) {
+        molarErr.textContent = 'La masse molaire doit être strictement positive.';
+        customM.focus();
+        return;
+      }
+
+      const temperatureCelsius = Number.parseFloat(document.getElementById('temp').value);
+      const pressureHpa = Number.parseFloat(document.getElementById('press').value);
+      const concentration = Number.parseFloat(document.getElementById('inputVal').value);
+
+      if (!Number.isFinite(temperatureCelsius) || temperatureCelsius <= -273.15) {
+        concErr.textContent = 'La température doit être supérieure à −273,15 °C.';
+        return;
+      }
+
+      if (!Number.isFinite(pressureHpa) || pressureHpa <= 0) {
+        concErr.textContent = 'La pression doit être strictement positive.';
+        return;
+      }
+
+      if (!Number.isFinite(concentration) || concentration < 0) {
+        concErr.textContent = 'La concentration doit être positive ou nulle.';
+        document.getElementById('inputVal').focus();
+        return;
+      }
+
+      const temperatureKelvin = temperatureCelsius + 273.15;
+      const pressurePascal = pressureHpa * 100;
+      const currentUnit = document.getElementById('inputUnit').value;
+      const decimals = Number.parseInt(document.getElementById('decimals').value, 10);
+      let microgramsPerCubicMetre;
+
+      switch (currentUnit) {
+        case 'ugm3': microgramsPerCubicMetre = concentration; break;
+        case 'mgm3': microgramsPerCubicMetre = concentration * 1000; break;
+        case 'ppm': microgramsPerCubicMetre = concentration * molarMass * pressurePascal / (R * temperatureKelvin); break;
+        case 'ppb': microgramsPerCubicMetre = concentration * molarMass * pressurePascal / (R * temperatureKelvin * 1000); break;
+        default: return;
+      }
+
+      const ppm = microgramsPerCubicMetre * R * temperatureKelvin / (molarMass * pressurePascal);
+      const values = {
+        ngm3: microgramsPerCubicMetre * 1000,
+        ugm3: microgramsPerCubicMetre,
+        mgm3: microgramsPerCubicMetre / 1000,
+        ppm,
+        ppb: ppm * 1000
+      };
+
+      const fragment = document.createDocumentFragment();
+      units.filter(unit => unit.key !== currentUnit).forEach(unit => {
+        const card = document.createElement('div');
+        card.className = 'result-card';
+
+        const value = document.createElement('span');
+        value.className = 'result-value';
+        value.textContent = values[unit.key].toLocaleString('fr-FR', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+
+        const label = document.createElement('span');
+        label.className = 'result-unit';
+        label.textContent = unit.label;
+        card.append(value, label);
+        fragment.appendChild(card);
+      });
+
+      resultsDiv.appendChild(fragment);
+      resultsSection.classList.add('visible');
+    }
+
+    document.getElementById('convertBtn').addEventListener('click', convert);
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && event.target.matches('input, select')) convert();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      pollutant.value = '';
+      customM.value = '';
+      customM.readOnly = true;
+      customM.placeholder = '—';
+      document.getElementById('temp').value = '20';
+      document.getElementById('press').value = '1013';
+      document.getElementById('inputVal').value = '';
+      document.getElementById('inputUnit').value = 'ugm3';
+      document.getElementById('decimals').value = '2';
+      clearResults();
+      pollutant.focus();
+    });
+  </script>
+</body>
+</html>
